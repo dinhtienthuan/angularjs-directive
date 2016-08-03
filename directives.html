@@ -17,6 +17,11 @@
     </div>
   </div>
   <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+  <script type="text/template" id="listTemplate">
+    <ul>
+      <li ng-repeat="item in data">{{item.price | currency}}</li>
+    </ul>
+  </script>
   <script>
     angular.module("exampleApp", [])
       .directive("unorderedList", function() {
@@ -25,7 +30,9 @@
             scope.data = scope[attrs["unorderedList"]];
           },
           restrict: "A",
-          template: "<ul><li ng-repeat='item in data'>{{item.price | currency}}</li></ul>"
+          template: function() {
+            return angular.element(document.querySelector("#listTemplate")).html();
+          }
         };
       })
       .controller("defaultCtrl", function($scope) {
