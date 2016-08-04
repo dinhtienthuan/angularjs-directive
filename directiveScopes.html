@@ -6,9 +6,9 @@
   <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
 </head>
 <body>
-  <div class="panel panel-default" ng-controller="scopeCtrl">
-    <div class="panel-body" scope-demo></div>
-    <div class="panel-body" scope-demo></div>
+  <div class="panel panel-default">
+    <div class="panel-body" scope-demo ng-controller="scopeCtrl"></div>
+    <div class="panel-body" scope-demo ng-controller="secondCtrl"></div>
   </div>
   <script type="text/javascript" src="bower_components/angular/angular.js"></script>
   <script>
@@ -19,6 +19,9 @@
         };
       })
       .controller("scopeCtrl", function($scope) {
+        // do nothing - no behaviors required
+      })
+      .controller("secondCtrl", function($scope) {
         // do nothing - no behaviors required
       });
   </script>
