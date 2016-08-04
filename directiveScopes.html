@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="exampleApp">
+<head>
+  <title>Directives</title>
+  <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+</head>
+<body>
+  <div class="panel panel-default" ng-controller="scopeCtrl">
+    <div class="panel-body" scope-demo></div>
+    <div class="panel-body" scope-demo></div>
+  </div>
+  <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+  <script>
+    angular.module("exampleApp", [])
+      .directive("scopeDemo", function() {
+        return {
+          template: "Name: <input ng-model='name'>"
+        };
+      })
+      .controller("scopeCtrl", function($scope) {
+        // do nothing - no behaviors required
+      });
+  </script>
+</body>
+</html>
