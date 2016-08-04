@@ -11,16 +11,26 @@
     <div class="panel-body" scope-demo></div>
   </div>
   <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+  <script type="text/ng-template" id="scopeTemplate">
+    <div class="panel-body">
+      <p>Name: <input type="text" ng-model="data.name"></p>
+      <p>City: <input type="text" ng-model="city"></p>
+      <p>Country: <input type="text" ng-model="country"></p>
+    </div>
+  </script>
   <script>
     angular.module("exampleApp", [])
       .directive("scopeDemo", function() {
         return {
-          template: "Name: <input ng-model='name'>",
+          template: function() {
+            return angular.element(document.querySelector("#scopeTemplate")).html();
+          },
           scope: true
         };
       })
       .controller("scopeCtrl", function($scope) {
-        // do nothing - no behaviors required
+        $scope.data = {name: "Adam"};
+        $scope.city = "London";
       });
   </script>
 </body>
