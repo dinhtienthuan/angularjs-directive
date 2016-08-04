@@ -10,12 +10,12 @@
     <div class="panel-body">
       Direct Binding: <input type="text" ng-model="data.name">
     </div>
-    <div class="panel-body" scope-demo city="getCity(data.name)" nameprop="data.name"></div>
+    <div class="panel-body" scope-demo city="getCity(nameVal)" nameprop="data.name"></div>
   </div>
   <script type="text/javascript" src="bower_components/angular/angular.js"></script>
   <script type="text/ng-template" id="scopeTemplate">
     <div class="panel-body">
-      <p>Nam: {{local}}, City: {{cityFn()}}</p>
+      <p>Nam: {{local}}, City: {{cityFn({nameVal: local})}}</p>
     </div>
   </script>
   <script>
