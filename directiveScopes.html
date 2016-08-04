@@ -5,23 +5,21 @@
   <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
 </head>
-<body>
+<body ng-controller="scopeCtrl">
   <div class="panel panel-default">
-    <div class="panel-body" scope-demo ng-controller="scopeCtrl"></div>
-    <div class="panel-body" scope-demo ng-controller="secondCtrl"></div>
+    <div class="panel-body" scope-demo></div>
+    <div class="panel-body" scope-demo></div>
   </div>
   <script type="text/javascript" src="bower_components/angular/angular.js"></script>
   <script>
     angular.module("exampleApp", [])
       .directive("scopeDemo", function() {
         return {
-          template: "Name: <input ng-model='name'>"
+          template: "Name: <input ng-model='name'>",
+          scope: true
         };
       })
       .controller("scopeCtrl", function($scope) {
-        // do nothing - no behaviors required
-      })
-      .controller("secondCtrl", function($scope) {
         // do nothing - no behaviors required
       });
   </script>
