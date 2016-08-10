@@ -7,7 +7,7 @@
 </head>
 <body ng-controller="defaultCtrl">
   <div><tri-button ng-model="dataValue"></tri-button></div>
-  <div class="well">
+  <div class="well">{{dataValue}}
     Value:
     <select ng-model="dataValue">
       <option>Yes</option>
@@ -50,6 +50,13 @@
             ctrl.$render = function() {
               setSelected(ctrl.$viewValue || "Not Sure");
             };
+
+            element.on("click", function(event) {
+              setSelected(event.target.innerText);
+              scope.$apply(function() {
+                ctrl.$setViewValue(event.target.innerText);
+              });
+            });
           }
         };
       });
