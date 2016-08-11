@@ -7,12 +7,13 @@
 </head>
 <body ng-controller="defaultCtrl">
   <div><tri-button ng-model="dataValue"></tri-button></div>
-  <div class="well">{{dataValue}}
+  <div class="well">
     Value:
     <select ng-model="dataValue">
       <option>Yes</option>
       <option>No</option>
       <option>Not Sure</option>
+      <option>Huh?</option>
     </select>
   </div>
   <script type="text/javascript" src="bower_components/angular/angular.js"></script>
@@ -50,6 +51,10 @@
             ctrl.$render = function() {
               setSelected(ctrl.$viewValue || "Not Sure");
             };
+
+            ctrl.$formatters.push(function(value) {
+              return value == "Huh?" ? "Not Sure" : value;
+            });
 
             element.on("click", function(event) {
               setSelected(event.target.innerText);
