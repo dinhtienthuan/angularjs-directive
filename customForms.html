@@ -4,18 +4,18 @@
   <title>CustomForms</title>
   <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+  <style>
+    *.error {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body ng-controller="defaultCtrl">
-  <div><tri-button ng-model="dataValue"></tri-button></div>
-  <div class="well">
-    Value:
-    <select ng-model="dataValue">
-      <option>Yes</option>
-      <option>No</option>
-      <option>Not Sure</option>
-      <option>Huh?</option>
-    </select>
-  </div>
+  <form name="myForm" novalidate>
+    <div><tri-button name="decision" ng-model="dataValue"></tri-button></div>
+  </form>
+
   <script type="text/javascript" src="bower_components/angular/angular.js"></script>
   <script type="text/ng-template" id="triTemplate">
     <div class="well">
@@ -24,6 +24,9 @@
         <button class="btn btn-default">No</button>
         <button class="btn btn-default">Not Sure</button>
       </div>
+      <span class="error" ng-show="myForm.decision.$error.confidence">
+        You need to be sure
+      </span>
     </div>
   </script>
   <script>
@@ -47,6 +50,14 @@
                 }
               }
             };
+
+            var validateParser = function(value) {
+              var valid = (value == "Yes" || value == "No");
+              ctrl.$setValidity("confidence", valid);
+              return valid ? value : undefined;
+            }
+
+            ctrl.$parsers.push(validateParser);
 
             ctrl.$render = function() {
               setSelected(ctrl.$viewValue || "Not Sure");
